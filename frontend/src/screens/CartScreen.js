@@ -36,9 +36,14 @@ const CartScreen = () => {
     dispatch(removeFromCart(id))
   }
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
-  }
+    if (userInfo) {
+      navigate('/shipping')
+    } else {
+      navigate('/login/?redirect=/shipping')
+    }  }
 
   return (
     <Row>
@@ -105,7 +110,14 @@ const CartScreen = () => {
                 .toFixed(2)}
             </ListGroupItem>
             <ListGroupItem>
-              <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>Proceed to Checkout</Button>
+              <Button
+                type='button'
+                className='btn-block'
+                disabled={cartItems.length === 0}
+                onClick={checkoutHandler}
+              >
+                Proceed to Checkout
+              </Button>
             </ListGroupItem>
           </ListGroup>
         </Card>

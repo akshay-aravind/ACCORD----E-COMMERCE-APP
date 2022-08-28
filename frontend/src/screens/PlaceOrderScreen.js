@@ -1,28 +1,57 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import CheckoutSteps from '../components/CheckoutSteps'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { createOrder } from '../actions/orderActions.js'
+import CheckoutSteps from '../components/CheckoutSteps.js'
 import Message from '../components/Message'
 
 const PlaceOrderScreen = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const cart = useSelector((state) => state.cart)
+  // const user = useSelector((state) => state.userLogin)
+  // const { userInfo } = user
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
 
+
   //calculate price
 
-  cart.itemsPrice = addDecimals(cart.cartItems.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  ))
+  cart.itemsPrice = addDecimals(
+    cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+  )
 
   cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100)
   cart.taxPrice = addDecimals(Number((0.01 * cart.itemsPrice).toFixed(2)))
- cart.totalPrice = addDecimals(Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice))
+  cart.totalPrice = (
+    Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)
+  ).toFixed(2)
+
+  const orderCreate = useSelector((state) => state.orderCreate)
+  const { order, success, error } = orderCreate
+
+  // const name = userInfo.name
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`)
+    }
+  }, [navigate, success, order])
+
   const placeOrderHandler = () => {
-    console.log('')
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    )
   }
 
   return (
@@ -43,7 +72,7 @@ const PlaceOrderScreen = () => {
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <strong> Method:</strong>
-              {cart.paymentMethod}
+              {(cart.paymentMethod = 'paypal')}
             </ListGroup.Item>
             <ListGroup.Item>
               <h2>Order Item</h2>
@@ -108,6 +137,9 @@ const PlaceOrderScreen = () => {
                   <Col>Total</Col>
                   <Col>Rs {cart.totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button

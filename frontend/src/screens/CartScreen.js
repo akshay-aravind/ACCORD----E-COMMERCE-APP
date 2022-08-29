@@ -24,8 +24,6 @@ const CartScreen = () => {
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
- 
-
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty))
@@ -39,13 +37,12 @@ const CartScreen = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const checkoutHandler = () => {
-  
-    
     if (userInfo) {
       navigate('/shipping')
     } else {
-      navigate('/login') 
-    }  }
+      navigate('/login')
+    }
+  }
 
   return (
     <Row>

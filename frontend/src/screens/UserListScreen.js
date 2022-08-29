@@ -5,17 +5,27 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { Table, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 
 const UserListScreen = () => {
+    const navigate = useNavigate()
 const dispatch =  useDispatch()
 
 const userList = useSelector(state => state.userList)
 const { loading , error, users } = userList 
+
+const userLogin = useSelector(state => state.userLogin)
+const { userInfo } = userLogin
+
 useEffect(() => {
-   dispatch(listUsers())
+    if(userInfo && userInfo.isAdmin){
+        dispatch(listUsers())
+    } else {
+        navigate('/login')
+    }
     
-}, [dispatch])
+}, [dispatch,navigate,userInfo])
 
 const deleteHandler = () => {
     console.log('delete');
@@ -50,7 +60,7 @@ const deleteHandler = () => {
                         <td>
                             <LinkContainer to={`/user/${user._id}/edit`}>
                                 <Button variant='light' className='btn-sm'>
-                                    <i className='fas-fa-edit'></i>
+                                    <i className='fas fa-edit'></i>
                                 </Button>
                             </LinkContainer>
                             <Button variant='danger' className='btn-sm' onClick={()=> deleteHandler(user._id)}>

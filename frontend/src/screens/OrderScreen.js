@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap'
+import { Card, Col, Image, ListGroup, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link  } from 'react-router-dom'
 import { getOrderDetails, payOrder } from '../actions/orderActions.js'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -16,7 +16,7 @@ const OrderScreen = () => {
   const [sdkReady, setSdkReady] = useState(false)
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+
 
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails

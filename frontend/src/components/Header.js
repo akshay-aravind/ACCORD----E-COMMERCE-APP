@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 import SearchBox from './SearchBox'
-import { Route, useNavigate, Routes} from 'react-router-dom'
+import { Route, Routes} from 'react-router-dom'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const Header = () => {
   }
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>ACCORD</Navbar.Brand>

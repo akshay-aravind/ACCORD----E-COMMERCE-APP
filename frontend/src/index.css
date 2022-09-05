@@ -47,3 +47,27 @@ h2 {
 .carousel a {
     margin: 0 auto;
 }
+
+.products::-webkit-scrollbar{
+    display: none;
+}
+
+.products {
+    white-space: nowrap;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 2px;
+}
+
+.cards {
+    margin-right: 15px;
+    padding: 5px;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+.productimage {
+    height: 250px;
+    min-width: 250px;
+}

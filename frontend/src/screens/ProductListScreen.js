@@ -9,13 +9,13 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import Paginate from '../components/Paginate'
 
 const ProductListScreen = () => {
 
-  const { pageNumber } = useParams() || 1 
+  // const { pageNumber } = useParams() || 1 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -49,7 +49,7 @@ const ProductListScreen = () => {
     if (successCreate) {
       navigate(`/admin/product/${createdProduct._id}/edit`)
     } else {
-      dispatch(listProducts('', pageNumber))
+      dispatch(listProducts())
     }
   }, [
     dispatch,
@@ -58,7 +58,7 @@ const ProductListScreen = () => {
     successDelete,
     successCreate,
     createdProduct,
-    pageNumber,
+   
   ])
 
 

@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown} from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 import SearchBox from './SearchBox'
-import { Route, Routes} from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
+
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -20,14 +21,16 @@ const Header = () => {
       <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>ACCORD</Navbar.Brand>
+            <Navbar.Brand>
+              ACCORD
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-           <Routes>
-            <Route path='/' element={<SearchBox /> }/>
-            <Route path='/search/:keyword' element={<SearchBox /> }/>
-           </Routes>
+            <Routes>
+              <Route path='/' element={<SearchBox />} />
+              <Route path='/search/:keyword' element={<SearchBox />} />
+            </Routes>
             <Nav className='ml-auto'>
               <LinkContainer to={`/cart`}>
                 <Nav.Link>

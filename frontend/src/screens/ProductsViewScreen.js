@@ -14,7 +14,7 @@ const ProductsViewScreen = () => {
   const { keyword } = useParams()
 
   const productList = useSelector((state) => state.productList)
-  const { loading, error, products} = productList
+  const { loading, error, products } = productList
 
   useEffect(() => {
     dispatch(listProducts(keyword))
@@ -22,7 +22,7 @@ const ProductsViewScreen = () => {
 
   return (
     <>
-      {!keyword }
+      {!keyword}
       <h1>Latest Products</h1>
       {loading ? (
         <Loader />
@@ -30,7 +30,9 @@ const ProductsViewScreen = () => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-              <Link to='/' className='btn btn-primary'>Go back</Link>
+          <Link to='/' className='btn btn-primary'>
+            Go back
+          </Link>
           <Row>
             {products.map((product) => (
               <Col
@@ -45,12 +47,6 @@ const ProductsViewScreen = () => {
               </Col>
             ))}
           </Row>
-
-          {/* <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ''}
-          /> */}
         </>
       )}
     </>

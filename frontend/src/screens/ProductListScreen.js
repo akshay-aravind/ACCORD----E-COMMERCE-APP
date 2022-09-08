@@ -11,7 +11,6 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
-import Paginate from '../components/Paginate'
 
 const ProductListScreen = () => {
 
@@ -20,7 +19,7 @@ const ProductListScreen = () => {
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList)
-  const { loading, error, products, page, pages } = productList
+  const { loading, error, products} = productList
 
   const productDelete = useSelector((state) => state.productDelete)
   const {
@@ -131,7 +130,6 @@ const ProductListScreen = () => {
             ))}
           </tbody>
         </Table>
-        <Paginate pages={pages} page={page} isAdmin={true}/>
         </>
       )}
     </>

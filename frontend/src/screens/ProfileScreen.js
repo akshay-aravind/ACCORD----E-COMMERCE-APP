@@ -5,9 +5,6 @@ import {
   Button,
   Row,
   Col,
-  FormGroup,
-  FormLabel,
-  FormControl,
   Table,
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -53,9 +50,9 @@ const ProfileScreen = () => {
         setEmail(user.email)
       }
     }
-  }, [dispatch, navigate, userInfo, user,success])
+  }, [dispatch, navigate, userInfo, user, success])
 
-  const submitHanlder = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
@@ -68,54 +65,60 @@ const ProfileScreen = () => {
       <Col md={5}>
         <h1>User Profile</h1>
         {message && <Message variant='danger'>{message}</Message>}
+
         {error && <Message variant='danger'>{error}</Message>}
         {success && <Message variant='success'>Profile Updated</Message>}
-        {loading && <Loader />}
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant='danger'>{error}</Message>
+        ) : (
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId='name'>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type='name'
+                placeholder='Enter name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-        <FormGroup controlId='name'>
-          <FormLabel>Name</FormLabel>
-          <FormControl
-            type='name'
-            placeholder='Enter name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></FormControl>
-        </FormGroup>
+            <Form.Group controlId='email'>
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                type='email'
+                placeholder='Enter email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-        <Form onSubmit={submitHanlder}>
-          <FormGroup controlId='email'>
-            <FormLabel>Email Address </FormLabel>
-            <FormControl
-              type='email'
-              placeholder='Enter email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></FormControl>
-          </FormGroup>
+            <Form.Group controlId='password'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Enter password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <FormGroup controlId='password'>
-            <FormLabel>Password</FormLabel>
-            <FormControl
-              type='password'
-              placeholder='Enter password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></FormControl>
-          </FormGroup>
-          <FormGroup controlId='confirmPassword'>
-            <FormLabel>Confirm Password</FormLabel>
-            <FormControl
-              type='password'
-              placeholder='Confirm password'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></FormControl>
-          </FormGroup>
+            <Form.Group controlId='confirmPassword'>
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Confirm password'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Button type='submit' variant='primary' className='my-3'>
-            Update
-          </Button>
-        </Form>
+            <Button type='submit' variant='primary'>
+              Update
+            </Button>
+          </Form>
+        )}
       </Col>
       <Col md={7}>
         <h2>My Orders</h2>

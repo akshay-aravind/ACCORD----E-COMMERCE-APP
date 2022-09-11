@@ -14,10 +14,10 @@ const Footer = () => {
             </div>
 
             <div>
-              <a href='/' className='me-4 text-reset'>
+              <a href='https://www.linkedin.com/in/akshay-aravind-054564228' className='me-4 text-reset'>
                 <MDBIcon fab icon='linkedin' />
               </a>
-              <a href='/' className='me-4 text-reset'>
+              <a href='https://github.com/akshay-aravind' className='me-4 text-reset'>
                 <MDBIcon fab icon='github' />
               </a>
             </div>
@@ -40,22 +40,22 @@ const Footer = () => {
                 <MDBCol md='2' lg='2' xl='2' className='mx-auto mb-4'>
                   <h6 className='text-uppercase fw-bold mb-4'>Products</h6>
                   <p>
-                    <a href='#!' className='text-reset'>
+                    <a href='https://www.apple.com/in/' className='text-reset'>
                       Apple
                     </a>
                   </p>
                   <p>
-                    <a href='#samsung' className='text-reset'>
+                    <a href='https://www.samsung.com/in' className='text-reset'>
                       Samsung
                     </a>
                   </p>
                   <p>
-                    <a href='#!' className='text-reset'>
+                    <a href='https://pixel.google/business/' className='text-reset'>
                       Pixel
                     </a>
                   </p>
                   <p>
-                    <a href='#!' className='text-reset'>
+                    <a href='https://www.oneplus.in/' className='text-reset'>
                       Oneplus
                     </a>
                   </p>
